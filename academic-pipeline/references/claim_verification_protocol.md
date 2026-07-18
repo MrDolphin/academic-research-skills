@@ -36,6 +36,21 @@ Compare each audited claim's population, timeframe, geography, and domain agains
 
 External motivation: Ren et al. (2026, arXiv:2607.13104 §5.1) — decomposition-based generation becomes vulnerable when sub-problems stop preserving the constraints of the original task (design inference: a drafted claim is the last link in that chain).
 
+## E5: Novelty-Claim Classification (#548 — advisory-only)
+
+E1 already extracts categorical assertions of primacy ("Y was the first to..."). Such claims assert the ABSENCE of prior literature, so E2/E3 source-tracing structurally cannot verify them — there is no cited source to trace. Classify them against the documented search (Schema 2 `search_strategy`) instead:
+
+| Classification | Definition |
+|----------------|------------|
+| `SUPPORTED_WITHIN_SEARCH` | Wording is search-bounded ("to our knowledge, based on searches of [databases] covering [date_range], as of [last_searched_at]...") AND the named databases + date range match the documented `search_strategy` exactly AND `last_searched_at` is recorded — a bound with no search-execution date is not verifiable and classifies `UNRESOLVED` with the note "record last_searched_at to resolve"; the nearest prior work (bibliography `relevance: core` on the same phenomenon, tie-broken by `relevance_score`, then `supporting`) is acknowledged where it exists, or its absence within the search is stated explicitly |
+| `UNRESOLVED` | Absolute wording ("first", "no prior work", "only") without a search bound, OR the stated bound does not match the documented `search_strategy`, OR `last_searched_at` is not recorded, OR no documented search basis exists |
+
+Never emit a "globally verified" novelty verdict — a search-bounded claim is verified WITHIN its search, nothing more.
+
+ADVISORY ONLY: `UNRESOLVED` rows never change Phase E verdicts and never gate PASS/FAIL — they are not issues, stay outside the gate's issue count, and may remain open when the gate passes. Each row carries a stable ID `ADV-E5-<n>` and is recorded in the Integrity Report's advisory table. Checkpoint options per row: **proceed open** (default; the decision lives in the checkpoint conversation record, not in a report field) or **explicitly confirm the absolute form** (same recording; when the user later generates the AI-usage disclosure, they carry confirmed-absolute claims into it). E5 defines no reword route and places no obligation on any downstream agent: a user who wants the bounded rewording asks for it as an ordinary revision instruction — the advisory table is visible wherever the Integrity Report travels, rows citable by their ADV-E5 IDs. Rows still open at Stage 4.5 simply remain recorded in the Final Integrity Report deliverable. No new dispatch path.
+
+External motivation: Ren et al. (2026, arXiv:2607.13104 §7.4) — discovery agents cannot easily verify novelty on their own and may exploit weak proxies.
+
 ## Verdict Taxonomy
 
 | Verdict | Definition | Severity | Example |

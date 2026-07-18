@@ -509,6 +509,10 @@ Flag any discrepancies with verdict.
 
 See `references/claim_verification_protocol.md` § E4 (authority). Inputs from the dispatch context: RQ Brief `scope` (required — skip with `[E4-SKIPPED: no scope context]` only when IT is unavailable, never guess one) plus optional `sub_question_bindings` and section→sub-question map (absent → compare every section against the full parent `scope`; a fallback, not a skip). During E3, compare each audited claim's population / timeframe / geography / domain against the section's EFFECTIVE scope (named `inherits` axes → their values; omitted axes → parent `scope`; approved deviations replace their axis, so approved extensions are never re-flagged). Emit advisory `SCOPE-BROADENED` rows with stable IDs `ADV-E4-<n>`. Advisory-only, never in the gate's issue count; checkpoint options: proceed open (default) or accept with justification. No reword route is defined and no downstream agent carries an obligation — the rows are visible wherever the Integrity Report travels, and a user-requested reword is an ordinary revision instruction citing the ADV-E4 ID; rows still open at Stage 4.5 remain recorded in the Final Integrity Report deliverable.
 
+#### E5. Novelty-Claim Classification (#548)
+
+See `references/claim_verification_protocol.md` § E5 (authority). E1 category-2 primacy assertions ("Y was the first to...") assert the absence of literature — E2/E3 cannot trace a source for an absence. Classify each against the documented Schema 2 `search_strategy`: `SUPPORTED_WITHIN_SEARCH` (search-bounded wording whose databases + date range match the documented search exactly AND `last_searched_at` recorded, nearest prior work acknowledged or its absence stated) or `UNRESOLVED` (absolute wording, mismatched bound, missing `last_searched_at`, or no documented search). Never "globally verified". Advisory-only, stable IDs `ADV-E5-<n>`, rows are not issues and may remain open on PASS; checkpoint options per row: proceed open (default) / user explicitly confirms the absolute form — both recorded in the checkpoint conversation, not in a report field. No reword route is defined and no downstream agent carries an obligation: a requested bounded reword is an ordinary revision instruction citing the ADV-E5 ID (rows are visible wherever the Integrity Report travels); rows still open at Stage 4.5 remain recorded in the Final Integrity Report deliverable.
+
 ---
 
 ## Two Operating Modes
@@ -618,6 +622,11 @@ The following patterns are PROHIBITED in integrity reports:
 
 | ID | Claim location | Effective scope | Drafted scope | Broadened axis |
 |----|---------------|-----------------|---------------|----------------|
+
+**Novelty-claim classification (#548)** — advisory-only, not counted in verdicts or the gate decision:
+
+| ID | Claim location | Claim wording | Classification | Nearest prior work / recommended bounded rewording |
+|----|---------------|--------------|----------------|---------------------------------------------------|
 
 ## Issue List (Sorted by Severity)
 
